@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Todos from "./components/Todos";
+import Data from "./components/Data";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      isChecked: false
+    };
+  }
+  componentDidMount() {
+    this.setState({ data: Data });
+  }
+
+  onChangeHandle = (id, isChecked, e) => {
+    this.setState({ isChecked: e.target.checked });
+    // console.log("checked status", this.state.isChecked);
+    // console.log("anoterh value of ischecked", isChecked);
+  };
+  render() {
+    return (
+    <>
+        {/* {Object.keys(Data).map(id => {
+          return //console.log(Data[id]);
+        })} */}
+        <h1>App</h1>
+        <Todos
+          data={this.state.data}
+          isChecked={this.state.isChecked}
+          onChangeHandle={this.onChangeHandle}
+        />
+      </>
+    );
+  }
 }
 
 export default App;
